@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+
+abstract model Base {
+  id Int @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+
+  // author has full access
+  // @@allow('all', auth() != null)
+
+  @@allow('all', auth().role == 'ADMIN')
+
+}
+
+
+model User extends Base {
+    name String
+    email String @unique
+    posts Post[]
+
+    @@allow('read', true)
+}
+
+model Post extends Base {
+    user User @relation(fields: [userId], references: [id])
+    userId Int
+}

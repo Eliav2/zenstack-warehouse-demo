@@ -1,0 +1,110 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+plugin hooks {
+    provider = '@zenstackhq/tanstack-query'
+    target = 'react'
+    version = 'v5'
+    output = 'src/hooks/generated'
+}
+
+plugin zod {
+    provider = '@core/zod'
+}
+
+abstract model Base {
+    id String @id @default(uuid())
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt()
+
+    // require login
+    @@deny('all', auth() == null)
+
+    // allow all operations for admin
+    @@allow('all', auth().role.name == 'Admin')
+}
+
+model User extends Base {
+    name String
+    email String @unique
+    profilePic String
+    role Role @relation(fields: [roleId], references: [id])
+    roleId String
+    manageres Product2Manager[]
+
+    @@allow('read', true)
+}
+
+model Role extends Base {
+    name RolesNames @unique
+    users User[]
+    permissions Permission[] // permissions assigned to the role
+
+    @@allow('read', true)
+}
+
+enum RolesNames {
+    Admin
+    Manager
+    Guest
+}
+
+model Permission extends Base {
+    name PermissionNames @unique
+    description String
+    roles Role[]
+
+    @@allow('read', true)
+}
+
+enum PermissionNames {
+    viewProduct
+    manageProduct
+    viewCorrespondent
+    manageCorrespondent
+}
+
+model Product extends Base {
+    name String @unique @length(min: 2)
+
+    stages ProductStage[] @relation("stages")
+
+    managers Product2Manager[]
+
+    @@allow('read', auth().role.permissions?[name == "Product"])
+    @@allow('all', auth().role.permissions?[name == "Product"])
+}
+
+model ProductStage extends Base {
+    stage Stage @default(ClientRequirements)
+    done Boolean @default(false)
+
+
+    ownedProducts_stages Product? @relation("stages", fields: [ownerProductId_stages], references: [id])
+    ownerProductId_stages String?
+
+    //@@unique([ownerProductId_currentStage, stage])
+}
+
+enum Stage {
+    ClientRequirements
+    ProductOverview
+    Published
+}
+
+model Product2Manager extends Base {
+    product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+    productId String
+    manager User @relation(fields: [managerId], references: [id])
+    managerId String
+
+    // the permissions on Product2Manager model are based on the permissions of the product
+    @@allow('read', auth().role.permissions?[name == "Product"])
+    @@allow('all', auth().role.permissions?[name == "Product"])
+}
