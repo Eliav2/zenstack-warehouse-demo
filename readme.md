@@ -29,7 +29,8 @@ To get started with this project, follow these steps:
      - `AUTH_GITHUB_ID` and `AUTH_GITHUB_SECRET` should be taken from you github sso
      - `AUTH_SECRET` should be some random string, you can use `openssl rand -hex 32` to generate one.
      - `DATABASE_URL` can be left as is if you are using the default docker-compose setup.
-5. `pnpm run dev` to start the backend+frontend servers+db with docker.
+5. `pnpm run dev` to start the backend+frontend servers+db with docker. 
+   RUNS BEST ON LINUX! 'concurrently' sucks on windows.  if got any issues, run the 'dev' script on backend and frontend separately.
 6. Note: only admins are allowed to update Products and their status.
    - login with github sso.
    - run `pnpm run studio` on the backend directory to interact with the db directly.
