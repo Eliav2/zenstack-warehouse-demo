@@ -10,8 +10,6 @@
   },
   "type": "module",
   "dependencies": {
-    "@auth/core": "^0.28.0",
-    "@auth/express": "^0.5.0",
     "@prisma/client": "5.11.0",
     "@trpc/client": "11.0.0-next-beta.318",
     "@trpc/server": "11.0.0-next-beta.318",
