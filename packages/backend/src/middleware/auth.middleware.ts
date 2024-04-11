@@ -1,7 +1,19 @@
-import { getSession } from "@auth/express";
 import { NextFunction, Request, Response } from "express";
-import { authConfig } from "../config/auth.config.js";
-import { getAuthenticatedUserFromCookie } from "../utils.js";
+
+export const getAuthenticatedUserFromCookie = (req: Request) => {
+  const user = req.session.passport?.user;
+  if (!user) {
+    return undefined;
+  }
+
+  const expires = user?.expires;
+  if (expires && new Date(expires) < new Date()) {
+    return undefined;
+  }
+  const email = user?.user;
+  return email;
+  // return prisma.user.findUnique({ where: { email: user.user } });
+};
 
 export async function authenticatedUser(
   req: Request,
@@ -15,19 +27,4 @@ export async function authenticatedUser(
   }
 
   res.status(401).json({ message: "Not Authenticated" });
-}
-
-export async function currentSession(
-  req: Request,
-  res: Response,
-  next: NextFunction,
-) {
-  const session = await getSession(req, authConfig);
-
-  // const user = session?.user;
-  // if (user) {
-  // }
-
-  res.locals.session = session;
-  return next();
 }

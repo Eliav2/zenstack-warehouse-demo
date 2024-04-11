@@ -18,7 +18,7 @@ The repository is structured as follows:
 To get started with this project, follow these steps:
 
 1. `pnpm install`
-2. `pnpm init`
+2. `pnpm init` (works smoothly only on linux. on windows you would need to do some step manually)
     - would setup local db postgres db via docker (means pull pg image for you if not exists)
     - would generate prisma client models.
     - would push the correct schema to the db and would run initial migration (`seed.ts`).

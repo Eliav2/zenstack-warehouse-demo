@@ -116,6 +116,7 @@ export const CreateProductForm = () => {
                   return (
                     <>
                       <Autocomplete
+                        freeSolo
                         disablePortal
                         options={PRODUCTS_TYPES}
                         onChange={(e, value) =>
@@ -125,6 +126,7 @@ export const CreateProductForm = () => {
                         renderInput={(params) => (
                           <TextField
                             {...params}
+                            autoFocus
                             label="Product Name"
                             helperText={field.state.meta.touchedErrors}
                           />
