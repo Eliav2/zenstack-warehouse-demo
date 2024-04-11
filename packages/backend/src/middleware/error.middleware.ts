@@ -8,7 +8,6 @@ export const errorHandler = (
   res: Response,
   next: NextFunction,
 ): void => {
-  // Render the error page
   res.status(("status" in err && err.status) || 500);
   res.render("error", {
     title: "status" in err ? err.status : err.name,

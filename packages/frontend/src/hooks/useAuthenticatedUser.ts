@@ -17,7 +17,7 @@ const useAuthenticatedUser = () => {
   const iamQuery = useQuery<string | { message: string }>({
     queryKey: ["iam"],
     queryFn: async () => {
-      const response = await fetch("/api/iam");
+      const response = await fetch("/api/auth/iam");
       if (!response.ok) {
         return null;
       }
@@ -42,7 +42,7 @@ const useAuthenticatedUser = () => {
         },
       },
     },
-    { enabled: !unauthenticated && !!userEmail }
+    { enabled: !unauthenticated && !!userEmail },
   );
   const _user = userQuery.data;
   const user = unauthenticated

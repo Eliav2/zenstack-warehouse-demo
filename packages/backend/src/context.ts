@@ -3,7 +3,8 @@ import * as trpcExpress from "@trpc/server/adapters/express";
 import { z } from "zod";
 import { enhance } from "@zenstackhq/runtime";
 import { prisma } from "./db.js";
-import { getAuthenticatedUserFromCookie } from "./utils.js";
+
+import { getAuthenticatedUserFromCookie } from "./middleware/auth.middleware.js";
 
 export const createContext = async ({
   req,
