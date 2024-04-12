@@ -1,11 +1,3 @@
-import type { Session as AuthSession } from "@auth/core/types";
-import { User } from "@prisma/client";
-
-export type Session = AuthSession;
-
-export type Response_Iam = Session;
-// export type UserSession = { email: string; name: string };
-
 declare module "express-session" {
   interface SessionData {
     passport: {

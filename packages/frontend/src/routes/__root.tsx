@@ -11,16 +11,6 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
-  // const router = useRouter();
-
-  // const breadcrumbs = router.state.matches.map((match) => {
-  //   const { routeContext } = match;
-  //   return {
-  //     title: routeContext.getTitle(),
-  //     path: match.path,
-  //   };
-  // });
-  // console.log("breadcrumbs", router.state.matches);
   return (
     <AppWrapper>
       <LoginProtected>
