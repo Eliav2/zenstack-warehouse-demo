@@ -6,7 +6,8 @@
     "dev": "tsx watch src/index.ts",
     "studio": "prisma studio --browser none",
     "seed": "tsx prisma/seed.ts",
-    "init": "zenstack generate && cp .env.example .env && prisma db push && prisma db seed"
+    "init": "zenstack generate && cp .env.example .env && prisma db push && prisma db seed",
+    "generate": "zenstack generate"
   },
   "type": "module",
   "dependencies": {
