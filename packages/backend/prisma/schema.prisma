@@ -4,70 +4,70 @@
 //////////////////////////////////////////////////////////////////////////////////////////////
 
 datasource db {
-    provider = "postgresql"
-    url = env("DATABASE_URL")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 enum RolesNames {
-    Admin
-    Manager
-    Guest
+  Admin
+  Manager
+  Guest
 }
 
 enum PermissionNames {
-    viewProduct
-    manageProduct
-    viewCorrespondent
-    manageCorrespondent
+  viewProduct
+  manageProduct
+  viewCorrespondent
+  manageCorrespondent
 }
 
 enum Stage {
-    ClientRequirements
-    ProductOverview
-    Published
+  ClientRequirements
+  ProductOverview
+  Published
 }
 
 /// @@deny('all', auth() == null)
 /// @@allow('all', auth().role.name == 'Admin')
 /// @@allow('read', true)
 model User {
-    id String @id() @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt()
-    name String
-    email String @unique()
-    profilePic String
-    role Role @relation(fields: [roleId], references: [id])
-    roleId String
-    manageres Product2Manager[]
+  id         String            @id() @default(uuid())
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt()
+  name       String
+  email      String            @unique()
+  profilePic String
+  role       Role              @relation(fields: [roleId], references: [id])
+  roleId     String
+  manageres  Product2Manager[]
 }
 
 /// @@deny('all', auth() == null)
 /// @@allow('all', auth().role.name == 'Admin')
 /// @@allow('read', true)
 model Role {
-    id String @id() @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt()
-    name RolesNames @unique()
-    users User[]
-    permissions Permission[]
+  id          String       @id() @default(uuid())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt()
+  name        RolesNames   @unique()
+  users       User[]
+  permissions Permission[]
 }
 
 /// @@deny('all', auth() == null)
 /// @@allow('all', auth().role.name == 'Admin')
 /// @@allow('read', true)
 model Permission {
-    id String @id() @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt()
-    name PermissionNames @unique()
-    description String
-    roles Role[]
+  id          String          @id() @default(uuid())
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt()
+  name        PermissionNames @unique()
+  description String
+  roles       Role[]
 }
 
 /// @@deny('all', auth() == null)
@@ -75,25 +75,25 @@ model Permission {
 /// @@allow('read', auth().role.permissions?[name == 'Product'])
 /// @@allow('all', auth().role.permissions?[name == 'Product'])
 model Product {
-    id String @id() @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt()
-    /// @length(min: 2)
-    name String @unique()
-    stages ProductStage[] @relation("stages")
-    managers Product2Manager[]
+  id        String            @id() @default(uuid())
+  createdAt DateTime          @default(now())
+  updatedAt DateTime          @updatedAt()
+  /// @length(min: 2)
+  name      String            @unique()
+  stages    ProductStage[]    @relation("stages")
+  managers  Product2Manager[]
 }
 
 /// @@deny('all', auth() == null)
 /// @@allow('all', auth().role.name == 'Admin')
 model ProductStage {
-    id String @id() @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt()
-    stage Stage @default(ClientRequirements)
-    done Boolean @default(false)
-    ownedProducts_stages Product? @relation("stages", fields: [ownerProductId_stages], references: [id])
-    ownerProductId_stages String?
+  id                    String   @id() @default(uuid())
+  createdAt             DateTime @default(now())
+  updatedAt             DateTime @updatedAt()
+  stage                 Stage    @default(ClientRequirements)
+  done                  Boolean  @default(false)
+  ownedProducts_stages  Product? @relation("stages", fields: [ownerProductId_stages], references: [id])
+  ownerProductId_stages String?
 }
 
 /// @@deny('all', auth() == null)
@@ -101,11 +101,11 @@ model ProductStage {
 /// @@allow('read', auth().role.permissions?[name == 'Product'])
 /// @@allow('all', auth().role.permissions?[name == 'Product'])
 model Product2Manager {
-    id String @id() @default(uuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt()
-    product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-    productId String
-    manager User @relation(fields: [managerId], references: [id])
-    managerId String
+  id        String   @id() @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt()
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId String
+  manager   User     @relation(fields: [managerId], references: [id])
+  managerId String
 }
