@@ -7,7 +7,8 @@
     "studio": "prisma studio --browser none",
     "seed": "tsx prisma/seed.ts",
     "init": "zenstack generate && cp .env.example .env && prisma db push && prisma db seed",
-    "generate": "ZENSTACK_TEST=1 zenstack generate"
+    "generate_": "ZENSTACK_TEST=1 zenstack generate",
+    "generate": "zenstack generate --output ../../node_modules/.zenstack"
   },
   "type": "module",
   "dependencies": {
@@ -20,6 +21,7 @@
     "@types/passport-github": "^1.1.12",
     "@types/pug": "^2.0.10",
     "@types/ramda": "^0.29.12",
+    "@types/ws": "^8.5.10",
     "axios": "^1.6.8",
     "cookie-session": "^2.1.0",
     "dotenv": "^16.4.5",
@@ -31,6 +33,7 @@
     "passport-github": "^1.1.0",
     "pug": "^3.0.2",
     "ramda": "^0.29.1",
+    "ws": "^8.17.0",
     "zod": "^3.22.4"
   },
   "devDependencies": {

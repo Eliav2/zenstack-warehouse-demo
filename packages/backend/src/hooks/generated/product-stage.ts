@@ -327,3 +327,9 @@ export function useCheckProductStage<TError = DefaultError>(args: { operation: P
     const { endpoint, fetch } = getHooksContext();
     return useModelQuery<boolean, boolean, TError>('ProductStage', `${endpoint}/productStage/check`, args, options, fetch);
 }
+import type { Stage } from '@prisma/client';
+
+export function useTransaction<TError = DefaultError>(args: { operation: PolicyCrudKind; where?: { id?: string; stage?: Stage; done?: boolean; ownerProductId_stages?: string }; }, options?: (Omit<UseQueryOptions<boolean, TError, boolean>, 'queryKey'> & ExtraQueryOptions)) {
+    const { endpoint, fetch } = getHooksContext();
+    return useModelQuery<boolean, boolean, TError>('ProductStage', `${endpoint}/productStage/transaction`, args, options, fetch);
+}

@@ -327,3 +327,9 @@ export function useCheckPermission<TError = DefaultError>(args: { operation: Pol
     const { endpoint, fetch } = getHooksContext();
     return useModelQuery<boolean, boolean, TError>('Permission', `${endpoint}/permission/check`, args, options, fetch);
 }
+import type { PermissionNames } from '@prisma/client';
+
+export function useTransaction<TError = DefaultError>(args: { operation: PolicyCrudKind; where?: { id?: string; name?: PermissionNames; description?: string }; }, options?: (Omit<UseQueryOptions<boolean, TError, boolean>, 'queryKey'> & ExtraQueryOptions)) {
+    const { endpoint, fetch } = getHooksContext();
+    return useModelQuery<boolean, boolean, TError>('Permission', `${endpoint}/permission/transaction`, args, options, fetch);
+}

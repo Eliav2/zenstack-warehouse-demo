@@ -7,7 +7,6 @@ import cookieSession from "cookie-session";
 import { getPrisma } from "./getPrisma.js";
 import { errorHandler } from "./middleware/error.middleware.js";
 import { cookieSessionFixMiddleware } from "./middleware/cookieSessionFix.middleware.js";
-
 import authRouter from "./routes/auth.routes.js";
 
 const require = createRequire(import.meta.url);
@@ -54,6 +53,25 @@ app.use(
 
 app.get("/", async (req: Request, res: Response) => {
   res.send("backend up").status(200);
+});
+
+import WebSocket, { WebSocketServer } from "ws";
+
+const wss = new WebSocketServer({ port: 8081 });
+
+wss.on("connection", (ws) => {
+  setTimeout(() => {
+    ws.send("Hey");
+    ws.close();
+  }, 5000);
+});
+
+app.get("/test-transaction", async (req: Request, res: Response) => {
+  const ws = new WebSocket("ws://localhost:8081");
+
+  ws.on("open", function open() {
+    ws.send("something");
+  });
 });
 app.get("/error", (req, res) => {
   throw new Error("Error route");

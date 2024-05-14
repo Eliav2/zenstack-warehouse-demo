@@ -326,3 +326,8 @@ export function useCheckProduct<TError = DefaultError>(args: { operation: Policy
     const { endpoint, fetch } = getHooksContext();
     return useModelQuery<boolean, boolean, TError>('Product', `${endpoint}/product/check`, args, options, fetch);
 }
+
+export function useTransaction<TError = DefaultError>(args: { operation: PolicyCrudKind; where?: { id?: string; name?: string }; }, options?: (Omit<UseQueryOptions<boolean, TError, boolean>, 'queryKey'> & ExtraQueryOptions)) {
+    const { endpoint, fetch } = getHooksContext();
+    return useModelQuery<boolean, boolean, TError>('Product', `${endpoint}/product/transaction`, args, options, fetch);
+}

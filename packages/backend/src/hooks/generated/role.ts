@@ -327,3 +327,9 @@ export function useCheckRole<TError = DefaultError>(args: { operation: PolicyCru
     const { endpoint, fetch } = getHooksContext();
     return useModelQuery<boolean, boolean, TError>('Role', `${endpoint}/role/check`, args, options, fetch);
 }
+import type { RolesNames } from '@prisma/client';
+
+export function useTransaction<TError = DefaultError>(args: { operation: PolicyCrudKind; where?: { id?: string; name?: RolesNames }; }, options?: (Omit<UseQueryOptions<boolean, TError, boolean>, 'queryKey'> & ExtraQueryOptions)) {
+    const { endpoint, fetch } = getHooksContext();
+    return useModelQuery<boolean, boolean, TError>('Role', `${endpoint}/role/transaction`, args, options, fetch);
+}

@@ -326,3 +326,8 @@ export function useCheckUser<TError = DefaultError>(args: { operation: PolicyCru
     const { endpoint, fetch } = getHooksContext();
     return useModelQuery<boolean, boolean, TError>('User', `${endpoint}/user/check`, args, options, fetch);
 }
+
+export function useTransaction<TError = DefaultError>(args: { operation: PolicyCrudKind; where?: { id?: string; name?: string; email?: string; profilePic?: string; roleId?: string }; }, options?: (Omit<UseQueryOptions<boolean, TError, boolean>, 'queryKey'> & ExtraQueryOptions)) {
+    const { endpoint, fetch } = getHooksContext();
+    return useModelQuery<boolean, boolean, TError>('User', `${endpoint}/user/transaction`, args, options, fetch);
+}
