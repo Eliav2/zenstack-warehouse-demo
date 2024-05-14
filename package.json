@@ -13,13 +13,16 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^5.14.0",
     "@tanstack/react-query": "^5.28.9",
-    "@zenstackhq/runtime": "1.12.0",
-    "@zenstackhq/server": "1.12.0",
-    "@zenstackhq/tanstack-query": "1.12.0",
+    "@zenstackhq/runtime": "workspace:*",
+    "@zenstackhq/server": "workspace:*",
+    "@zenstackhq/tanstack-query": "workspace:*",
+    "prisma": "^5.14.0",
     "shared": "workspace:*",
     "type-fest": "^4.14.0",
-    "zenstack": "1.12.0"
+    "zenstack": "workspace:*",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "prettier": "^3.2.5",
