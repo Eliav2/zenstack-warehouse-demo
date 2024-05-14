@@ -1,0 +1,3 @@
+[submodule "zenstack"]
+	path = zenstack
+	url = https://github.com/Eliav2/zenstack
