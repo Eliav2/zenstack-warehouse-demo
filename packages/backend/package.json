@@ -3,15 +3,14 @@
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {
-    "dev": "tsx watch src/index.ts",
+    "dev": "ZENSTACK_TEST=1 tsx watch src/index.ts",
     "studio": "prisma studio --browser none",
     "seed": "tsx prisma/seed.ts",
     "init": "zenstack generate && cp .env.example .env && prisma db push && prisma db seed",
-    "generate": "zenstack generate --output /home/eliav/development/personal/zenstack-warehouse-demo/node_modules/.zenstack"
+    "generate": "ZENSTACK_TEST=1 zenstack generate"
   },
   "type": "module",
   "dependencies": {
-    "@prisma/client": "5.11.0",
     "@trpc/client": "11.0.0-next-beta.318",
     "@trpc/server": "11.0.0-next-beta.318",
     "@types/cookie-session": "^2.0.48",
@@ -37,7 +36,6 @@
   "devDependencies": {
     "@types/express": "4.17.21",
     "@types/node": "20.11.24",
-    "prisma": "5.11.0",
     "tsx": "^4.7.1",
     "typescript": "^5.4.3"
   },

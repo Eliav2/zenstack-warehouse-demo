@@ -17,7 +17,7 @@ export default defineConfig({
     alias: {
       "zod-models": path.resolve(
         __dirname,
-        "../../node_modules/@zenstackhq/runtime/zod/models",
+        "../backend/node_modules/.zenstack/zod/models",
       ),
       "prisma-models": path.resolve(
         __dirname,
