@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Box, Divider, Typography } from "@mui/material";
-import { useFindManyProduct } from "backend/src/hooks/generated";
+import { useFindManyProduct } from "zenstack-demo-warehouse-backend/src/hooks/generated";
 import { Stack } from "@mui/system";
 import ProductCard from "../../components/ProductCard.tsx";
 import Link from "../../components/Link.tsx";

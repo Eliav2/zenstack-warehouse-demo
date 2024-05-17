@@ -3,7 +3,7 @@ import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
-import { useFindFirstProduct } from "backend/src/hooks/generated";
+import { useFindFirstProduct } from "zenstack-demo-warehouse-backend/src/hooks/generated";
 import { Stage } from "prisma-models";
 
 const Stages = Object.values(Stage) as (keyof typeof Stage)[];

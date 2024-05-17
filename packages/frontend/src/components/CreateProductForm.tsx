@@ -6,7 +6,7 @@ import {
   useCreateProductStage,
   useFindManyProduct,
   useUpdateProduct,
-} from "backend/src/hooks/generated";
+} from "zenstack-demo-warehouse-backend/src/hooks/generated";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import {

@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+  "name": "zenstack-demo-warehouse-frontend",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -32,7 +32,7 @@
     "@trpc/server": "11.0.0-next-beta.318",
     "dayjs": "^1.11.10",
     "immer": "^10.0.4",
-    "backend": "workspace:*",
+    "zenstack-demo-warehouse-backend": "workspace:*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "recoil": "^0.7.7",

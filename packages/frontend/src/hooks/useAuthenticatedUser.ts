@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { useFindFirstUser } from "backend/src/hooks/generated";
+import { useFindFirstUser } from "zenstack-demo-warehouse-backend/src/hooks/generated";
 import type { PermissionNames } from "prisma-models";
 
 export const handleSignIn = () => {

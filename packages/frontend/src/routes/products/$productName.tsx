@@ -14,7 +14,7 @@ import {
   useFindFirstProduct,
   useUpdateProduct,
   useUpdateProductStage,
-} from "backend/src/hooks/generated";
+} from "zenstack-demo-warehouse-backend/src/hooks/generated";
 import { ProductStage, Stage } from "prisma-models";
 import * as React from "react";
 import Step from "@mui/material/Step";
